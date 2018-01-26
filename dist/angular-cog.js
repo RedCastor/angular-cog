@@ -119,14 +119,14 @@ angular.module('angularCog').factory('MakeRequestService', [
         url: getUrl(verb, attrs),
         data: data,
         config: scope[attrs.CogConfig]
-      }).success(function (data, status, headers, config) {
+      }).then(function (data, status, headers, config) {
         //common function to set scope variables
         responseReceived(data, status, headers, config);
         //evaluates cog-success expression of directive
         scope.$eval(attrs.cogSuccess);
         //global success handler
         CogConfig.success(data, status, headers, config);
-      }).error(function (data, status, headers, config) {
+      },function (data, status, headers, config) {
         //common function to set scope variables
         responseReceived(data, status, headers, config);
         //evaluates cog-error expression of directive
